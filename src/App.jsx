@@ -33,6 +33,10 @@ const accountHolders = [
   { name: 'Widmer Meinrad Anton ', initial: 'W' },
 ];
 
+// Fixed account and routing numbers
+const ACCOUNT_NUMBER = '4782916503';
+const ROUTING_NUMBER = '021000021';
+
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -989,6 +993,7 @@ const TransactionsPage = () => (
 const AccountsPage = () => {
   const [showAccountNumber, setShowAccountNumber] = useState(false);
   const [showBalance, setShowBalance] = useState(true);
+  const [showRoutingNumber, setShowRoutingNumber] = useState(false);
 
   return (
     <DashboardLayout activePage="accounts">
@@ -1014,8 +1019,8 @@ const AccountsPage = () => {
                 <div>
                   <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Number</p>
                   <div className="flex items-center justify-between">
-                    <p className="text-base sm:text-lg font-semibold text-gray-900">
-                      {showAccountNumber ? '1234 5678 9012 4892' : '•••• •••• •••• 4892'}
+                    <p className="text-base sm:text-lg font-semibold text-gray-900 font-mono">
+                      {showAccountNumber ? ACCOUNT_NUMBER : '••••••' + ACCOUNT_NUMBER.slice(-4)}
                     </p>
                     <button
                       onClick={() => setShowAccountNumber(!showAccountNumber)}
@@ -1023,6 +1028,21 @@ const AccountsPage = () => {
                       aria-label={showAccountNumber ? "Hide account number" : "Show account number"}
                     >
                       {showAccountNumber ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-1">Routing Number</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-base sm:text-lg font-semibold text-gray-900 font-mono">
+                      {showRoutingNumber ? ROUTING_NUMBER : '•••••' + ROUTING_NUMBER.slice(-4)}
+                    </p>
+                    <button
+                      onClick={() => setShowRoutingNumber(!showRoutingNumber)}
+                      className="ml-4 p-2 hover:bg-gray-100 rounded-lg transition"
+                      aria-label={showRoutingNumber ? "Hide routing number" : "Show routing number"}
+                    >
+                      {showRoutingNumber ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
                 </div>
