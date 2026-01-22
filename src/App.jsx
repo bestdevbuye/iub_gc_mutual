@@ -1291,78 +1291,44 @@ const TransfersPage = () => {
   );
 };
 
-const StatementsPage = () => {
-  const [showPopup, setShowPopup] = useState(false);
+const StatementsPage = () => (
+  <DashboardLayout activePage="statements">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-4 sm:space-y-6"
+    >
+      <div>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Statements</h2>
+        <p className="text-sm sm:text-base text-gray-600">Download and view your account statements</p>
+      </div>
 
-  const handleDownload = () => {
-    setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 3000);
-  };
-
-  return (
-    <DashboardLayout activePage="statements">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4 sm:space-y-6"
-      >
-        <div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Statements</h2>
-          <p className="text-sm sm:text-base text-gray-600">Download and view your account statements</p>
-        </div>
-
-        {/* Popup Notification */}
-        <AnimatePresence>
-          {showPopup && (
-            <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-              className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
-            >
-              <div className="flex items-center space-x-3 px-6 py-4 bg-yellow-50 border border-yellow-200 rounded-xl shadow-xl">
-                <Shield className="text-yellow-600" size={22} />
-                <p className="text-sm font-medium text-yellow-800">
-                  Statement download is currently unavailable. Please contact support.
-                </p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {['January 2026', 'December 2025', 'November 2025', 'October 2025', 'September 2025', 'August 2025'].map((month, idx) => (
-              <div key={idx} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:border-green-600 hover:shadow-md transition">
-                <div className="flex items-start justify-between mb-3 sm:mb-4">
-                  <div className="flex items-center space-x-2 sm:space-x-3">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <FileText className="text-green-600" size={20} />
-                    </div>
-                    <div>
-                      <p className="text-sm sm:text-base font-semibold text-gray-900">{month}</p>
-                      <p className="text-xs text-gray-500">PDF Statement</p>
-                    </div>
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {['January 2026', 'December 2025', 'November 2025', 'October 2025', 'September 2025', 'August 2025'].map((month, idx) => (
+            <div key={idx} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:border-green-600 hover:shadow-md transition">
+              <div className="flex items-start justify-between mb-3 sm:mb-4">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FileText className="text-green-600" size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm sm:text-base font-semibold text-gray-900">{month}</p>
+                    <p className="text-xs text-gray-500">PDF Statement</p>
                   </div>
                 </div>
-                <button
-                  onClick={handleDownload}
-                  className="w-full flex items-center justify-center space-x-2 px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm"
-                >
-                  <Download size={14} />
-                  <span>Download</span>
-                </button>
               </div>
-            ))}
-          </div>
+              <button className="w-full flex items-center justify-center space-x-2 px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm">
+                <Download size={14} />
+                <span>Download</span>
+              </button>
+            </div>
+          ))}
         </div>
-      </motion.div>
-    </DashboardLayout>
-  );
-};
+      </div>
+    </motion.div>
+  </DashboardLayout>
+);
 
 const SecurityPage = () => (
   <DashboardLayout activePage="security">
