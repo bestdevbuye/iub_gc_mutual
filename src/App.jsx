@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { create } from 'zustand';
 import {
@@ -13,14 +13,12 @@ import icon from "./assets/icon.png";
 
 // Zustand Store for State Management
 const useStore = create((set) => ({
-  currentPage: 'landing',
   isAuthenticated: false,
   user: null,
   sidebarOpen: true,
   notifications: 3,
-  setPage: (page) => set({ currentPage: page }),
-  login: (user) => set({ isAuthenticated: true, user, currentPage: 'dashboard' }),
-  logout: () => set({ isAuthenticated: false, user: null, currentPage: 'landing' }),
+  login: (user) => set({ isAuthenticated: true, user }),
+  logout: () => set({ isAuthenticated: false, user: null }),
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 }));
 
@@ -44,7 +42,6 @@ const accountHolders = [
   { name: 'Anton', initial: 'A' },
 ];
 
-// Format Currency
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -53,10 +50,19 @@ const formatCurrency = (amount) => {
   }).format(amount);
 };
 
+// Helper to get page from URL hash
+const getPageFromHash = () => {
+  const hash = window.location.hash.replace('#/', '');
+  return hash || 'landing';
+};
+
+// Helper to navigate
+const navigateTo = (page) => {
+  window.location.hash = `/${page}`;
+};
+
 // Landing Page Component
 const LandingPage = () => {
-  const setPage = useStore((state) => state.setPage);
-
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -64,7 +70,7 @@ const LandingPage = () => {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              {/* <div className="w-10 h-10 bg-bank-primary rounded flex items-center justify-center">
+              {/* <div className="w-10 h-10 bg-green-600 rounded flex items-center justify-center">
                 <Building2 className="text-white" size={20} />
               </div>
               <div>
@@ -79,14 +85,14 @@ const LandingPage = () => {
             </div>
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => setPage('login')}
-                className="text-sm font-medium text-bank-primary hover:text-green-900 transition"
+                onClick={() => navigateTo('login')}
+                className="text-sm font-medium text-green-700 hover:text-green-900 transition"
               >
                 Sign In
               </button>
               <button
-                onClick={() => setPage('signup')}
-                className="bg-bank-primary text-white px-6 py-2 rounded text-sm font-medium hover:bg-bank-primary/90 transition"
+                onClick={() => navigateTo('signup')}
+                className="bg-green-600 text-white px-6 py-2 rounded text-sm font-medium hover:bg-green-700 transition"
               >
                 Open Account
               </button>
@@ -96,7 +102,7 @@ const LandingPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-bank-primary/90 to-bank-primary/60 to-slate-800 text-white py-20 sm:py-32">
+      <section className="bg-gradient-to-br from-green-700 to-slate-800 text-white py-20 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -119,7 +125,7 @@ const LandingPage = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <button
-                  onClick={() => setPage('signup')}
+                  onClick={() => navigateTo('signup')}
                   className="bg-yellow-400 text-gray-900 px-8 py-4 rounded font-semibold text-lg hover:bg-yellow-500 transition"
                 >
                   Get Started
@@ -194,7 +200,7 @@ const LandingPage = () => {
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <div className="text-bank-primary font-semibold mb-2">Why Choose G&C Mutual Bank</div>
+            <div className="text-green-600 font-semibold mb-2">Why Choose G&C Mutual Bank</div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Enterprise Banking Solutions</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Advanced financial services designed for individuals and businesses who demand excellence
@@ -215,7 +221,7 @@ const LandingPage = () => {
                 className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition border border-gray-100"
               >
                 <div className="w-14 h-14 bg-green-50 rounded-lg flex items-center justify-center mb-6">
-                  <feature.icon className="text-bank-primary" size={28} />
+                  <feature.icon className="text-green-600" size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
@@ -226,7 +232,7 @@ const LandingPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-bank-primary/70 to-bank-primary/90">
+      <section className="py-24 bg-gradient-to-r from-green-600 to-green-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center text-white">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Experience Premium Banking?</h2>
           <p className="text-xl text-gray-200 mb-10">
@@ -234,13 +240,13 @@ const LandingPage = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <button
-              onClick={() => setPage('signup')}
+              onClick={() => navigateTo('signup')}
               className="bg-yellow-400 text-gray-900 px-10 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-500 transition shadow-lg"
             >
               Open an Account Today
             </button>
             <button
-              onClick={() => setPage('login')}
+              onClick={() => navigateTo('login')}
               className="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition"
             >
               Sign In to Your Account
@@ -269,8 +275,8 @@ const LandingPage = () => {
                 Providing trusted financial services and wealth management solutions since 1952.
               </p>
               <div className="mt-6 flex items-center space-x-2 text-sm text-gray-300">
-                <Mail size={16} className="text-bank-accent" />
-                <a href="mailto:admin@gcmutualbank.com" className="hover:text-bank-accent">
+                <Mail size={16} className="text-orange-400" />
+                <a href="mailto:admin@gcmutualbank.com" className="hover:text-orange-400">
                   admin@gcmutualbank.com
                 </a>
               </div>
@@ -302,17 +308,12 @@ const LandingPage = () => {
 
 // Login Page Component
 const LoginPage = () => {
-  const { setPage, login } = useStore();
+  const { login } = useStore();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [popup, setPopup] = useState({
-    show: false,
-    type: '', // 'success' | 'error'
-    message: '',
-  });
+  const [popup, setPopup] = useState({ show: false, type: '', message: '' });
   const [loading, setLoading] = useState(false);
-
 
   const DEMO_EMAIL = 'manianton@hispeed.ch';
   const DEMO_PASSWORD = 'ManiAnton123!';
@@ -330,6 +331,7 @@ const LoginPage = () => {
 
       setTimeout(() => {
         login({ name: 'Mani Anton', email: DEMO_EMAIL });
+        navigateTo('dashboard');
       }, 1500);
     } else {
       setPopup({
@@ -344,17 +346,15 @@ const LoginPage = () => {
     }
   };
 
-
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bank-primary/90 to-bank-primary/60 to-slate-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-700 to-slate-800 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8"
       >
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-bank-primary rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
             {/* <Building2 className="text-white" size={32} /> */}
             <img
               src={icon}
@@ -376,7 +376,7 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none"
               />
             </div>
           </div>
@@ -390,7 +390,7 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
+                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none"
               />
               <button
                 type="button"
@@ -407,7 +407,7 @@ const LoginPage = () => {
               <input type="checkbox" className="mr-2" />
               <span className="text-gray-600">Remember me</span>
             </label>
-            <a href="#" className="text-bank-primary hover:text-green-800 font-medium">Forgot password?</a>
+            <a href="#" className="text-green-600 hover:text-green-800 font-medium">Forgot password?</a>
           </div>
 
           <button
@@ -415,7 +415,7 @@ const LoginPage = () => {
             disabled={loading}
             className={`w-full py-3 rounded-lg font-semibold transition ${loading
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-bank-accent text-gray-900 hover:bg-bank-accent/90'
+              : 'bg-orange-500 text-white hover:bg-orange-600'
               }`}
           >
             {loading ? 'Signing in...' : 'Sign In'}
@@ -425,8 +425,8 @@ const LoginPage = () => {
             Don't have an account?{' '}
             <button
               type="button"
-              onClick={() => setPage('signup')}
-              className="text-bank-primary hover:text-green-800 font-medium"
+              onClick={() => navigateTo('signup')}
+              className="text-green-600 hover:text-green-800 font-medium"
             >
               Sign Up
             </button>
@@ -434,18 +434,12 @@ const LoginPage = () => {
         </form>
 
         <button
-          onClick={() => setPage('landing')}
+          onClick={() => navigateTo('landing')}
           className="mt-6 w-full text-center text-sm text-gray-600 hover:text-gray-800"
         >
           ← Back to Home
         </button>
 
-        {/* <div className="mt-8 p-4 bg-green-50 rounded-lg border border-green-100">
-          <p className="text-xs text-green-800 text-center">
-            <Shield className="inline mr-1" size={14} />
-            This is a demo. Enter any credentials to continue.
-          </p>
-        </div> */}
         <AnimatePresence>
           {popup.show && (
             <motion.div
@@ -477,7 +471,6 @@ const LoginPage = () => {
             </motion.div>
           )}
         </AnimatePresence>
-
       </motion.div>
     </div>
   );
@@ -485,44 +478,45 @@ const LoginPage = () => {
 
 // Signup Page Component
 const SignupPage = () => {
-  const { setPage, login } = useStore();
   const [showPassword, setShowPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-
-  const [popup, setPopup] = useState({
-    show: false,
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [popup, setPopup] = useState({ show: false, message: '' });
 
   const handleSignup = (e) => {
     e.preventDefault();
-
-    // Show success card
     setSubmitted(true);
-
-    // Show popup
     setPopup({
       show: true,
-      message:
-        'Application submitted successfully. Please log in using the your account.',
+      message: 'Application submitted successfully. Please log in using your account.',
     });
 
-    // Redirect safely (NO PAGE RELOAD)
     setTimeout(() => {
       setPopup({ show: false, message: '' });
-      setPage('login');
+      navigateTo('login');
     }, 3000);
   };
 
+  const ApplicationSubmittedCard = () => (
+    <div className="max-w-md bg-white rounded-2xl shadow-lg p-8 text-center">
+      <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center">
+        <CheckCircle className="text-green-600" size={32} />
+      </div>
+      <h2 className="mt-6 text-xl font-semibold">Application Submitted</h2>
+      <p className="mt-3 text-sm text-gray-600">
+        Your application has been received. Please proceed to login using your account.
+      </p>
+      <button
+        onClick={() => navigateTo('login')}
+        className="mt-6 w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600"
+      >
+        Go to Login
+      </button>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-bank-primary/90 via-bank-primary/70 to-slate-800 flex items-center justify-center p-4">
-      {/* POPUP */}
+    <div className="min-h-screen bg-gradient-to-br from-green-700 via-green-600 to-slate-800 flex items-center justify-center p-4">
       <AnimatePresence>
         {popup.show && (
           <motion.div
@@ -534,24 +528,20 @@ const SignupPage = () => {
           >
             <div className="flex items-center space-x-3 px-6 py-4 bg-green-50 border border-green-200 rounded-xl shadow-lg">
               <CheckCircle className="text-green-600" size={22} />
-              <p className="text-sm font-medium text-green-800">
-                {popup.message}
-              </p>
+              <p className="text-sm font-medium text-green-800">{popup.message}</p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       <div className="flex w-full max-w-4xl rounded-2xl overflow-hidden">
-        {/* LEFT PANEL */}
-        <div className="hidden md:flex flex-col justify-center w-1/2 bg-bank-primary text-white p-10">
+        <div className="hidden md:flex flex-col justify-center w-1/2 bg-green-600 text-white p-10">
           <h2 className="text-3xl font-semibold">Apply for an Account</h2>
           <p className="mt-4 text-sm text-white/80">
             Secure. Regulated. International banking solutions.
           </p>
         </div>
 
-        {/* RIGHT PANEL */}
         <div className="w-full md:w-1/2 flex items-center justify-center">
           {submitted ? (
             <motion.div
@@ -559,7 +549,7 @@ const SignupPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="w-full flex justify-center"
             >
-              <ApplicationSubmittedCard setPage={setPage} />
+              <ApplicationSubmittedCard />
             </motion.div>
           ) : (
             <motion.div
@@ -567,9 +557,9 @@ const SignupPage = () => {
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8"
             >
-              {/* HEADER */}
               <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-bank-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  {/* <Building2 className="text-white" size={32} /> */}
                   <img
                     src={icon}
                     alt="FinFlow logo"
@@ -577,69 +567,51 @@ const SignupPage = () => {
                   />
                 </div>
                 <h1 className="text-2xl font-bold text-gray-900">Create Account</h1>
-                <p className="text-gray-600 mt-2">
-                  Join G&amp;C Mutual Bank today
-                </p>
+                <p className="text-gray-600 mt-2">Join G&C Mutual Bank today</p>
               </div>
 
-              {/* FORM */}
               <form onSubmit={handleSignup} className="space-y-6">
-                {/* FULL NAME */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input
                       type="text"
                       required
                       value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Enter your full name"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary outline-none"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 outline-none"
                     />
                   </div>
                 </div>
 
-                {/* EMAIL */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input
                       type="email"
                       required
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="Enter your email"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary outline-none"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 outline-none"
                     />
                   </div>
                 </div>
 
-                {/* PASSWORD */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Password
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       required
                       value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       placeholder="Create a password"
-                      className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary outline-none"
+                      className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 outline-none"
                     />
                     <button
                       type="button"
@@ -651,46 +623,34 @@ const SignupPage = () => {
                   </div>
                 </div>
 
-                {/* SUBMIT */}
                 <button
                   type="submit"
-                  className="w-full bg-bank-primary text-white py-3 rounded-lg font-semibold hover:bg-bank-primary/90 transition"
+                  className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
                 >
                   Submit Application
                 </button>
 
-                {/* FOOTER LINKS */}
                 <div className="text-center text-sm text-gray-600">
                   Already have an account?{' '}
                   <button
                     type="button"
-                    onClick={() => setPage('login')}
-                    className="text-bank-primary font-medium hover:underline"
+                    onClick={() => navigateTo('login')}
+                    className="text-green-600 font-medium hover:underline"
                   >
                     Sign In
                   </button>
                   <p className="mt-3 text-xs text-gray-500">
-                    By continuing, you agree to G&amp;C Mutual Bank’s onboarding
-                    and compliance review.
+                    By continuing, you agree to G&C Mutual Bank's onboarding and compliance review.
                   </p>
                 </div>
               </form>
 
-              {/* BACK HOME */}
               <button
-                onClick={() => setPage('landing')}
+                onClick={() => navigateTo('landing')}
                 className="mt-6 w-full text-sm text-gray-600 hover:text-gray-800"
               >
                 ← Back to Home
               </button>
-
-              {/* DEMO NOTICE */}
-              {/* <div className="mt-8 p-4 bg-green-50 rounded-lg border border-green-100">
-                <p className="text-xs text-green-800 text-center">
-                  <Shield className="inline mr-1" size={14} />
-                  This is a demo. Any details may be used to proceed.
-                </p>
-              </div> */}
             </motion.div>
           )}
         </div>
@@ -699,42 +659,12 @@ const SignupPage = () => {
   );
 };
 
-
-
-/* ---------- SUCCESS CARD ---------- */
-
-const ApplicationSubmittedCard = ({ setPage }) => (
-  <div className="max-w-md bg-white rounded-2xl shadow-lg p-8 text-center">
-    <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center">
-      <CheckCircle className="text-green-600" size={32} />
-    </div>
-
-    <h2 className="mt-6 text-xl font-semibold">
-      Application Submitted
-    </h2>
-
-    <p className="mt-3 text-sm text-gray-600">
-      Your application has been received.
-      Please proceed to login using the your account.
-    </p>
-
-    <button
-      onClick={() => setPage('login')}
-      className="mt-6 w-full bg-bank-accent py-3 rounded-lg font-semibold"
-    >
-      Go to Login
-    </button>
-  </div>
-);
-
-
-
 // Dashboard Layout Component
 const DashboardLayout = ({ children, activePage }) => {
   const { logout, sidebarOpen, toggleSidebar } = useStore();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -750,9 +680,13 @@ const DashboardLayout = ({ children, activePage }) => {
     { id: 'settings', icon: Settings, label: 'Settings' },
   ];
 
+  const handleLogout = () => {
+    logout();
+    navigateTo('landing');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4 sm:space-x-8">
@@ -764,7 +698,7 @@ const DashboardLayout = ({ children, activePage }) => {
             </button>
 
             <div className="flex items-center space-x-3">
-              {/* <div className="w-10 h-10 bg-bank-primary rounded flex items-center justify-center">
+              {/* <div className="w-10 h-10 bg-green-600 rounded flex items-center justify-center">
                 <Building2 className="text-white" size={20} />
               </div>
               <div className="hidden sm:block">
@@ -790,7 +724,7 @@ const DashboardLayout = ({ children, activePage }) => {
                 <p className="text-sm font-medium text-gray-800">Marco</p>
                 <p className="text-xs text-gray-500">Account Holder</p>
               </div>
-              <div className="w-10 h-10 bg-bank-primary rounded-full flex items-center justify-center text-white font-semibold">
+              <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-semibold">
                 M
               </div>
             </div>
@@ -799,7 +733,6 @@ const DashboardLayout = ({ children, activePage }) => {
       </header>
 
       <div className="flex">
-        {/* Sidebar */}
         <AnimatePresence>
           {(sidebarOpen || !isMobile) && (
             <motion.aside
@@ -816,9 +749,9 @@ const DashboardLayout = ({ children, activePage }) => {
                     return (
                       <li key={item.id}>
                         <button
-                          onClick={() => useStore.getState().setPage(item.id)}
+                          onClick={() => navigateTo(item.id)}
                           className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition ${isActive
-                            ? 'bg-bank-primary text-white'
+                            ? 'bg-green-600 text-white'
                             : 'text-gray-700 hover:bg-gray-50'
                             }`}
                         >
@@ -832,7 +765,7 @@ const DashboardLayout = ({ children, activePage }) => {
 
                 <div className="mt-8 pt-8 border-t border-gray-200">
                   <button
-                    onClick={logout}
+                    onClick={handleLogout}
                     className="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition w-full"
                   >
                     <LogOut size={20} />
@@ -844,13 +777,11 @@ const DashboardLayout = ({ children, activePage }) => {
           )}
         </AnimatePresence>
 
-        {/* Main Content */}
         <main className="flex-1 p-4 sm:p-8 overflow-x-hidden">
           {children}
         </main>
       </div>
 
-      {/* Mobile Overlay */}
       {isMobile && sidebarOpen && (
         <div
           onClick={toggleSidebar}
@@ -1233,6 +1164,7 @@ const AccountsPage = () => {
   );
 };
 
+
 // Transfers Page
 const TransfersPage = () => {
   const [amount, setAmount] = useState('');
@@ -1488,31 +1420,92 @@ const SettingsPage = () => {
   );
 };
 
-// Main App Component
+
+// Main App Component with Hash Routing
 const App = () => {
-  const { currentPage, isAuthenticated } = useStore();
+  const { isAuthenticated, logout } = useStore();
+  const [currentPage, setCurrentPage] = useState(getPageFromHash());
+
+  // Listen to hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentPage(getPageFromHash());
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Update page title based on current page
+  useEffect(() => {
+    const titles = {
+      landing: 'G&C Mutual Bank - Home',
+      login: 'G&C Mutual Bank - Sign In',
+      signup: 'G&C Mutual Bank - Create Account',
+      dashboard: 'G&C Mutual Bank - Dashboard',
+      accounts: 'G&C Mutual Bank - Accounts',
+      transactions: 'G&C Mutual Bank - Transactions',
+      transfers: 'G&C Mutual Bank - Transfers',
+      statements: 'G&C Mutual Bank - Statements',
+      security: 'G&C Mutual Bank - Security',
+      settings: 'G&C Mutual Bank - Settings',
+    };
+    document.title = titles[currentPage] || 'G&C Mutual Bank';
+  }, [currentPage]);
+
+  // Auth guard - redirect to dashboard if authenticated and on auth pages
+  useEffect(() => {
+    if (isAuthenticated && (currentPage === 'login' || currentPage === 'signup')) {
+      navigateTo('dashboard');
+    }
+  }, [isAuthenticated, currentPage]);
+
+  // Protected routes - redirect to login if not authenticated
+  const protectedPages = ['dashboard', 'accounts', 'transactions', 'transfers', 'statements', 'security', 'settings'];
+  useEffect(() => {
+    if (!isAuthenticated && protectedPages.includes(currentPage)) {
+      navigateTo('login');
+    }
+  }, [isAuthenticated, currentPage]);
+
+  // Render appropriate page
+  const renderPage = () => {
+    if (!isAuthenticated) {
+      switch (currentPage) {
+        case 'login':
+          return <LoginPage key="login" />;
+        case 'signup':
+          return <SignupPage key="signup" />;
+        default:
+          return <LandingPage key="landing" />;
+      }
+    }
+
+    switch (currentPage) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'accounts':
+        return <AccountsPage />;
+      case 'transactions':
+        return <TransactionsPage />;
+      case 'transfers':
+        return <TransfersPage />;
+      case 'statements':
+        return <StatementsPage />;
+      case 'security':
+        return <SecurityPage />;
+      case 'settings':
+        return <SettingsPage />;
+      default:
+        return <Dashboard />;
+    }
+  };
 
   return (
     <AnimatePresence mode="wait">
-      {!isAuthenticated ? (
-        currentPage === 'login' ? (
-          <LoginPage key="login" />
-        ) : currentPage === 'signup' ? (
-          <SignupPage key="signup" />
-        ) : (
-          <LandingPage key="landing" />
-        )
-      ) : (
-        <motion.div key={currentPage}>
-          {currentPage === 'dashboard' && <Dashboard />}
-          {currentPage === 'accounts' && <AccountsPage />}
-          {currentPage === 'transactions' && <TransactionsPage />}
-          {currentPage === 'transfers' && <TransfersPage />}
-          {currentPage === 'statements' && <StatementsPage />}
-          {currentPage === 'security' && <SecurityPage />}
-          {currentPage === 'settings' && <SettingsPage />}
-        </motion.div>
-      )}
+      <motion.div key={currentPage}>
+        {renderPage()}
+      </motion.div>
     </AnimatePresence>
   );
 };
