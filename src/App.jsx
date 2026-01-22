@@ -26,20 +26,11 @@ const useStore = create((set) => ({
 const transactions = [
   { id: 1, date: 'Jan 21, 2026', sender: 'Marco Holger', initials: 'MH', bank: 'Bank of America', amount: 550000000, status: 'Completed', color: 'bg-green-600' },
   { id: 2, date: 'Jan 21, 2026', sender: 'Marco Holger', initials: 'MH', bank: 'G&C Mutual Bank', amount: 86400000, status: 'Completed', color: 'bg-green-600' },
-  // { id: 3, date: 'Jan 10, 2024', sender: 'Michelle', initials: 'M', bank: 'Chase Bank', amount: 12500000, status: 'Completed', color: 'bg-purple-600' },
-  // { id: 4, date: 'Jan 08, 2024', sender: 'Widmer', initials: 'W', bank: 'Wells Fargo', amount: 8750000, status: 'Completed', color: 'bg-indigo-600' },
-  // { id: 5, date: 'Jan 05, 2024', sender: 'Janet', initials: 'J', bank: 'Citibank', amount: 15000000, status: 'Completed', color: 'bg-pink-600' },
-  // { id: 6, date: 'Jan 03, 2024', sender: 'Meinrad', initials: 'M', bank: 'HSBC', amount: 22000000, status: 'Completed', color: 'bg-green-600' },
-  // { id: 7, date: 'Jan 01, 2024', sender: 'Anton', initials: 'A', bank: 'Deutsche Bank', amount: 18500000, status: 'Completed', color: 'bg-orange-600' },
 ];
 
 const accountHolders = [
   { name: 'Marco Michelle Janet', initial: 'M' },
   { name: 'Widmer Meinrad Anton ', initial: 'W' },
-  // { name: 'Janet', initial: 'J' },
-  // { name: 'Widmer', initial: 'W' },
-  // { name: 'Meinrad', initial: 'M' },
-  // { name: 'Anton', initial: 'A' },
 ];
 
 const formatCurrency = (amount) => {
@@ -829,6 +820,8 @@ const DashboardLayout = ({ children, activePage }) => {
 
 // Dashboard Page (simplified for space)
 const Dashboard = () => {
+  const [showBalance, setShowBalance] = useState(true);
+
   return (
     <DashboardLayout activePage="dashboard">
       <motion.div
@@ -858,7 +851,18 @@ const Dashboard = () => {
             </div>
 
             <div className="mb-6 sm:mb-8">
-              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2">$636,400,000.00</p>
+              <div className="flex items-center justify-between">
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
+                  {showBalance ? '$636,400,000.00' : '••••••••••'}
+                </p>
+                <button
+                  onClick={() => setShowBalance(!showBalance)}
+                  className="ml-4 p-2 hover:bg-white/10 rounded-lg transition"
+                  aria-label={showBalance ? "Hide balance" : "Show balance"}
+                >
+                  {showBalance ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               <p className="text-xs sm:text-sm opacity-90">USD</p>
             </div>
 
@@ -875,7 +879,7 @@ const Dashboard = () => {
                     </div>
                   ))}
                 </div>
-                <span className="text-xs sm:text-sm ml-2">Marco, Michelle, Janet, Widmer, Meinrad, Anton</span>
+                <span className="text-xs sm:text-sm ml-2">Marco Michelle Janet, Widmer Meinrad Anton</span>
               </div>
             </div>
           </div>
@@ -982,84 +986,116 @@ const TransactionsPage = () => (
   </DashboardLayout>
 );
 
-const AccountsPage = () => (
-  <DashboardLayout activePage="accounts">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-4 sm:space-y-6"
-    >
-      <div>
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Accounts</h2>
-        <p className="text-sm sm:text-base text-gray-600">Manage your banking accounts</p>
-      </div>
+const AccountsPage = () => {
+  const [showAccountNumber, setShowAccountNumber] = useState(false);
+  const [showBalance, setShowBalance] = useState(true);
 
-      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 md:p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          <div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Account Details</h3>
-            <div className="space-y-3 sm:space-y-4">
-              <div>
-                <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Name</p>
-                <p className="text-base sm:text-lg font-semibold text-gray-900">Joint Checking Account</p>
-              </div>
-              <div>
-                <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Number</p>
-                <p className="text-base sm:text-lg font-semibold text-gray-900">•••• •••• •••• 4892</p>
-              </div>
-              <div>
-                <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Type</p>
-                <p className="text-base sm:text-lg font-semibold text-gray-900">Joint Account</p>
-              </div>
-              <div>
-                <p className="text-xs sm:text-sm text-gray-600 mb-1">Status</p>
-                <span className="inline-flex items-center px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-green-100 text-green-800">
-                  <CheckCircle2 size={14} className="mr-1 sm:mr-1.5" />
-                  Active
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Balance Information</h3>
-            <div className="space-y-3 sm:space-y-4">
-              <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-lg p-4 sm:p-6">
-                <p className="text-xs sm:text-sm text-green-100 mb-1">Available Balance</p>
-                <p className="text-2xl sm:text-3xl font-bold text-white">$636,400,000.00</p>
-              </div>
-              <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
-                <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Balance</p>
-                <p className="text-xl sm:text-2xl font-bold text-gray-900">$636,400,000.00</p>
-              </div>
-            </div>
-          </div>
+  return (
+    <DashboardLayout activePage="accounts">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="space-y-4 sm:space-y-6"
+      >
+        <div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Accounts</h2>
+          <p className="text-sm sm:text-base text-gray-600">Manage your banking accounts</p>
         </div>
 
-        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200">
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Joint Account Holders</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {accountHolders.map((holder, idx) => (
-              <div key={idx} className="flex items-center space-x-3 p-3 sm:p-4 bg-gray-50 rounded-lg">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-semibold text-sm sm:text-base flex-shrink-0">
-                  {holder.initial}
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 md:p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Account Details</h3>
+              <div className="space-y-3 sm:space-y-4">
+                <div>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Name</p>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900">Joint Checking Account</p>
                 </div>
                 <div>
-                  <p className="text-sm sm:text-base font-semibold text-gray-900">{holder.name}</p>
-                  <p className="text-xs sm:text-sm text-gray-600">Account Holder</p>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Number</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-base sm:text-lg font-semibold text-gray-900">
+                      {showAccountNumber ? '1234 5678 9012 4892' : '•••• •••• •••• 4892'}
+                    </p>
+                    <button
+                      onClick={() => setShowAccountNumber(!showAccountNumber)}
+                      className="ml-4 p-2 hover:bg-gray-100 rounded-lg transition"
+                      aria-label={showAccountNumber ? "Hide account number" : "Show account number"}
+                    >
+                      {showAccountNumber ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Type</p>
+                  <p className="text-base sm:text-lg font-semibold text-gray-900">Joint Account</p>
+                </div>
+                <div>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-1">Status</p>
+                  <span className="inline-flex items-center px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-green-100 text-green-800">
+                    <CheckCircle2 size={14} className="mr-1 sm:mr-1.5" />
+                    Active
+                  </span>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Balance Information</h3>
+              <div className="space-y-3 sm:space-y-4">
+                <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-lg p-4 sm:p-6">
+                  <p className="text-xs sm:text-sm text-green-100 mb-1">Available Balance</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-2xl sm:text-3xl font-bold text-white">
+                      {showBalance ? '$636,400,000.00' : '••••••••••'}
+                    </p>
+                    <button
+                      onClick={() => setShowBalance(!showBalance)}
+                      className="ml-4 p-2 hover:bg-white/10 rounded-lg transition"
+                      aria-label={showBalance ? "Hide balance" : "Show balance"}
+                    >
+                      {showBalance ? <EyeOff size={20} className="text-white" /> : <Eye size={20} className="text-white" />}
+                    </button>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
+                  <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Balance</p>
+                  <p className="text-xl sm:text-2xl font-bold text-gray-900">
+                    {showBalance ? '$636,400,000.00' : '••••••••••'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Joint Account Holders</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {accountHolders.map((holder, idx) => (
+                <div key={idx} className="flex items-center space-x-3 p-3 sm:p-4 bg-gray-50 rounded-lg">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-semibold text-sm sm:text-base flex-shrink-0">
+                    {holder.initial}
+                  </div>
+                  <div>
+                    <p className="text-sm sm:text-base font-semibold text-gray-900">{holder.name}</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Account Holder</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div>
-  </DashboardLayout>
-);
+      </motion.div>
+    </DashboardLayout>
+  )
+};
 
 const TransfersPage = () => {
   const [formData, setFormData] = useState({
     transferType: 'Internal Transfer',
+    bankName: '',
+    accountNumber: '',
     recipient: '',
     amount: '',
     note: ''
@@ -1123,10 +1159,10 @@ const TransfersPage = () => {
                     <p className="text-sm text-red-800">
                       <strong>Email:</strong>{' '}
                       <a
-                        href="mailto:admin@gcmutualbank.com"
+                        href="mailto:admin@gcmutualbanks.com"
                         className="underline hover:text-red-900 font-semibold"
                       >
-                        admin@gcmutualbank.com
+                        admin@gcmutualbanks.com
                       </a>
                     </p>
                     <p className="text-xs text-red-700 mt-2">
@@ -1146,9 +1182,7 @@ const TransfersPage = () => {
         </AnimatePresence>
 
         <motion.div
-          animate={shake ? {
-            x: [0, -10, 10, -10, 10, 0],
-          } : {}}
+          animate={shake ? { x: [0, -10, 10, -10, 10, 0] } : {}}
           transition={{ duration: 0.5 }}
           className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 md:p-8 max-w-2xl"
         >
@@ -1168,12 +1202,36 @@ const TransfersPage = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Recipient</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Bank Name</label>
+              <input
+                type="text"
+                value={formData.bankName}
+                onChange={(e) => setFormData({ ...formData, bankName: e.target.value })}
+                placeholder="Enter recipient's bank name"
+                required
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Account Number</label>
+              <input
+                type="text"
+                value={formData.accountNumber}
+                onChange={(e) => setFormData({ ...formData, accountNumber: e.target.value })}
+                placeholder="Enter recipient's account number"
+                required
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Recipient Name</label>
               <input
                 type="text"
                 value={formData.recipient}
                 onChange={(e) => setFormData({ ...formData, recipient: e.target.value })}
-                placeholder="Enter recipient name or account"
+                placeholder="Enter recipient's full name"
                 required
                 className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
               />
@@ -1233,44 +1291,78 @@ const TransfersPage = () => {
   );
 };
 
-const StatementsPage = () => (
-  <DashboardLayout activePage="statements">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-4 sm:space-y-6"
-    >
-      <div>
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Statements</h2>
-        <p className="text-sm sm:text-base text-gray-600">Download and view your account statements</p>
-      </div>
+const StatementsPage = () => {
+  const [showPopup, setShowPopup] = useState(false);
 
-      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {['January 2024', 'December 2023', 'November 2023', 'October 2023', 'September 2023', 'August 2023'].map((month, idx) => (
-            <div key={idx} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:border-green-600 hover:shadow-md transition">
-              <div className="flex items-start justify-between mb-3 sm:mb-4">
-                <div className="flex items-center space-x-2 sm:space-x-3">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <FileText className="text-green-600" size={20} />
-                  </div>
-                  <div>
-                    <p className="text-sm sm:text-base font-semibold text-gray-900">{month}</p>
-                    <p className="text-xs text-gray-500">PDF Statement</p>
+  const handleDownload = () => {
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
+
+  return (
+    <DashboardLayout activePage="statements">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="space-y-4 sm:space-y-6"
+      >
+        <div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Statements</h2>
+          <p className="text-sm sm:text-base text-gray-600">Download and view your account statements</p>
+        </div>
+
+        {/* Popup Notification */}
+        <AnimatePresence>
+          {showPopup && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
+            >
+              <div className="flex items-center space-x-3 px-6 py-4 bg-yellow-50 border border-yellow-200 rounded-xl shadow-xl">
+                <Shield className="text-yellow-600" size={22} />
+                <p className="text-sm font-medium text-yellow-800">
+                  Statement download is currently unavailable. Please contact support.
+                </p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            {['January 2026', 'December 2025', 'November 2025', 'October 2025', 'September 2025', 'August 2025'].map((month, idx) => (
+              <div key={idx} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:border-green-600 hover:shadow-md transition">
+                <div className="flex items-start justify-between mb-3 sm:mb-4">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <FileText className="text-green-600" size={20} />
+                    </div>
+                    <div>
+                      <p className="text-sm sm:text-base font-semibold text-gray-900">{month}</p>
+                      <p className="text-xs text-gray-500">PDF Statement</p>
+                    </div>
                   </div>
                 </div>
+                <button
+                  onClick={handleDownload}
+                  className="w-full flex items-center justify-center space-x-2 px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm"
+                >
+                  <Download size={14} />
+                  <span>Download</span>
+                </button>
               </div>
-              <button className="w-full flex items-center justify-center space-x-2 px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm">
-                <Download size={14} />
-                <span>Download</span>
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </motion.div>
-  </DashboardLayout>
-);
+      </motion.div>
+    </DashboardLayout>
+  );
+};
 
 const SecurityPage = () => (
   <DashboardLayout activePage="security">
@@ -1338,7 +1430,7 @@ const SettingsPage = () => (
                 <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                 <input
                   type="text"
-                  defaultValue="Marco Holger"
+                  defaultValue="Marco Michelle Janet, Widmer Meinrad Anton"
                   className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
                 />
               </div>
