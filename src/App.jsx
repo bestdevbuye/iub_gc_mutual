@@ -24,22 +24,22 @@ const useStore = create((set) => ({
 
 // Demo Data
 const transactions = [
-  { id: 1, date: 'Jan 15, 2024', sender: 'Marco Holger', initials: 'MH', bank: 'Bank of America', amount: 550000000, status: 'Completed', color: 'bg-green-600' },
-  { id: 2, date: 'Jan 14, 2024', sender: 'Marco Holger', initials: 'MH', bank: 'G&C Mutual Bank', amount: 86400000, status: 'Completed', color: 'bg-green-600' },
-  { id: 3, date: 'Jan 10, 2024', sender: 'Michelle', initials: 'M', bank: 'Chase Bank', amount: 12500000, status: 'Completed', color: 'bg-purple-600' },
-  { id: 4, date: 'Jan 08, 2024', sender: 'Widmer', initials: 'W', bank: 'Wells Fargo', amount: 8750000, status: 'Completed', color: 'bg-indigo-600' },
-  { id: 5, date: 'Jan 05, 2024', sender: 'Janet', initials: 'J', bank: 'Citibank', amount: 15000000, status: 'Completed', color: 'bg-pink-600' },
-  { id: 6, date: 'Jan 03, 2024', sender: 'Meinrad', initials: 'M', bank: 'HSBC', amount: 22000000, status: 'Completed', color: 'bg-green-600' },
-  { id: 7, date: 'Jan 01, 2024', sender: 'Anton', initials: 'A', bank: 'Deutsche Bank', amount: 18500000, status: 'Completed', color: 'bg-orange-600' },
+  { id: 1, date: 'Jan 21, 2026', sender: 'Marco Holger', initials: 'MH', bank: 'Bank of America', amount: 550000000, status: 'Completed', color: 'bg-green-600' },
+  { id: 2, date: 'Jan 21, 2026', sender: 'Marco Holger', initials: 'MH', bank: 'G&C Mutual Bank', amount: 86400000, status: 'Completed', color: 'bg-green-600' },
+  // { id: 3, date: 'Jan 10, 2024', sender: 'Michelle', initials: 'M', bank: 'Chase Bank', amount: 12500000, status: 'Completed', color: 'bg-purple-600' },
+  // { id: 4, date: 'Jan 08, 2024', sender: 'Widmer', initials: 'W', bank: 'Wells Fargo', amount: 8750000, status: 'Completed', color: 'bg-indigo-600' },
+  // { id: 5, date: 'Jan 05, 2024', sender: 'Janet', initials: 'J', bank: 'Citibank', amount: 15000000, status: 'Completed', color: 'bg-pink-600' },
+  // { id: 6, date: 'Jan 03, 2024', sender: 'Meinrad', initials: 'M', bank: 'HSBC', amount: 22000000, status: 'Completed', color: 'bg-green-600' },
+  // { id: 7, date: 'Jan 01, 2024', sender: 'Anton', initials: 'A', bank: 'Deutsche Bank', amount: 18500000, status: 'Completed', color: 'bg-orange-600' },
 ];
 
 const accountHolders = [
-  { name: 'Marco', initial: 'M' },
-  { name: 'Michelle', initial: 'M' },
-  { name: 'Janet', initial: 'J' },
-  { name: 'Widmer', initial: 'W' },
-  { name: 'Meinrad', initial: 'M' },
-  { name: 'Anton', initial: 'A' },
+  { name: 'Marco Michelle Janet', initial: 'M' },
+  { name: 'Widmer Meinrad Anton ', initial: 'W' },
+  // { name: 'Janet', initial: 'J' },
+  // { name: 'Widmer', initial: 'W' },
+  // { name: 'Meinrad', initial: 'M' },
+  // { name: 'Anton', initial: 'A' },
 ];
 
 const formatCurrency = (amount) => {
@@ -102,52 +102,50 @@ const LandingPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-700 to-slate-800 text-white py-20 sm:py-32">
+      <section className="bg-gradient-to-br from-green-700 to-slate-800 text-white py-12 sm:py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
-                <span className="text-sm font-medium flex items-center">
-                  <Shield className="mr-2 text-yellow-400" size={16} />
+              <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 mb-4 sm:mb-6">
+                <span className="text-xs sm:text-sm font-medium flex items-center">
+                  <Shield className="mr-1.5 sm:mr-2 text-yellow-400" size={14} />
                   FDIC Insured • Secure Banking
                 </span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
                 Banking Built on<br />
                 <span className="text-yellow-400">Trust & Excellence</span>
               </h1>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed">
                 Experience institutional-grade banking with personalized service. Secure accounts, advanced wealth management, and 24/7 digital access.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
                   onClick={() => navigateTo('signup')}
-                  className="bg-yellow-400 text-gray-900 px-8 py-4 rounded font-semibold text-lg hover:bg-yellow-500 transition"
+                  className="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded text-base sm:text-lg font-semibold hover:bg-yellow-500 transition w-full sm:w-auto text-center"
                 >
                   Get Started
                 </button>
-                <button className="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded font-semibold text-lg hover:bg-white/20 transition">
+                <button className="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-6 sm:px-8 py-3 sm:py-4 rounded text-base sm:text-lg font-semibold hover:bg-white/20 transition w-full sm:w-auto text-center">
                   Learn More
                 </button>
               </div>
-              <div className="mt-12 flex items-center flex-wrap gap-8">
+              <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-6">
                 <div>
-                  <div className="text-3xl font-bold text-yellow-400">$45B+</div>
-                  <div className="text-sm text-gray-400">Assets Under Management</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">$45B+</div>
+                  <div className="text-xs sm:text-sm text-gray-400 mt-1">Assets Under Management</div>
                 </div>
-                <div className="w-px h-12 bg-white/20"></div>
                 <div>
-                  <div className="text-3xl font-bold text-yellow-400">150K+</div>
-                  <div className="text-sm text-gray-400">Trusted Clients</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">150K+</div>
+                  <div className="text-xs sm:text-sm text-gray-400 mt-1">Trusted Clients</div>
                 </div>
-                <div className="w-px h-12 bg-white/20"></div>
                 <div>
-                  <div className="text-3xl font-bold text-yellow-400">70+</div>
-                  <div className="text-sm text-gray-400">Years of Service</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">70+</div>
+                  <div className="text-xs sm:text-sm text-gray-400 mt-1">Years of Service</div>
                 </div>
               </div>
             </motion.div>
@@ -157,13 +155,13 @@ const LandingPage = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="hidden md:block"
             >
-              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-2xl">
+              <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 lg:p-8 shadow-2xl">
                 <div className="flex items-center justify-between mb-6">
                   <div className="text-sm text-gray-300">Account Overview</div>
                 </div>
                 <div className="mb-8">
                   <div className="text-sm text-gray-400 mb-2">Total Balance</div>
-                  <div className="text-4xl font-bold">$636,400,000.00</div>
+                  <div className="text-3xl lg:text-4xl font-bold">$636,400,000.00</div>
                   <div className="text-sm text-green-400 mt-2 flex items-center">
                     <TrendingUp size={16} className="mr-1" />
                     +12.5% this month
@@ -197,16 +195,16 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-12 sm:py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <div className="text-green-600 font-semibold mb-2">Why Choose G&C Mutual Bank</div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Enterprise Banking Solutions</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-10 sm:mb-16">
+            <div className="text-green-600 font-semibold mb-2 text-sm sm:text-base">Why Choose G&C Mutual Bank</div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Enterprise Banking Solutions</h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               Advanced financial services designed for individuals and businesses who demand excellence
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {[
               { icon: Shield, title: 'Bank-Grade Security', desc: 'Multi-factor authentication, 256-bit encryption, and real-time fraud monitoring protect your assets 24/7.' },
               { icon: Users, title: 'Joint Account Management', desc: 'Seamlessly manage accounts with multiple holders. Perfect for families, partners, and business teams.' },
@@ -218,13 +216,13 @@ const LandingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition border border-gray-100"
+                className="bg-white rounded-xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition border border-gray-100"
               >
-                <div className="w-14 h-14 bg-green-50 rounded-lg flex items-center justify-center mb-6">
-                  <feature.icon className="text-green-600" size={28} />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-50 rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                  <feature.icon className="text-green-600" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{feature.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{feature.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -232,22 +230,22 @@ const LandingPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-green-600 to-green-800">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-r from-green-600 to-green-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Experience Premium Banking?</h2>
-          <p className="text-xl text-gray-200 mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Ready to Experience Premium Banking?</h2>
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-10">
             Join thousands of satisfied clients who trust G&C Mutual Bank with their financial future
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
             <button
               onClick={() => navigateTo('signup')}
-              className="bg-yellow-400 text-gray-900 px-10 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-500 transition shadow-lg"
+              className="bg-yellow-400 text-gray-900 px-8 sm:px-10 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-yellow-500 transition shadow-lg w-full sm:w-auto"
             >
               Open an Account Today
             </button>
             <button
               onClick={() => navigateTo('login')}
-              className="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition"
+              className="bg-white/10 backdrop-blur-sm border border-white/30 text-white px-8 sm:px-10 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white/20 transition w-full sm:w-auto"
             >
               Sign In to Your Account
             </button>
@@ -256,28 +254,28 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-16">
+      <footer className="bg-gray-900 text-gray-300 py-10 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div>
-              <div className="flex items-center space-x-2 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
+            <div className="sm:col-span-2 md:col-span-1">
+              <div className="flex items-center space-x-2 mb-4 sm:mb-6">
                 {/* <div className="w-10 h-10 bg-yellow-400 rounded flex items-center justify-center">
                   <Building2 className="text-gray-900" size={20} />
                 </div>
-                <div className="text-xl font-bold text-white">G&C Mutual Bank</div> */}
+                <div className="text-lg sm:text-xl font-bold text-white">G&C Mutual Bank</div> */}
                 <img
                   src={logo}
                   alt="FinFlow logo"
                   className="h-10 w-auto"
                 />
               </div>
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className="text-sm text-gray-400 leading-relaxed mb-4 sm:mb-6">
                 Providing trusted financial services and wealth management solutions since 1952.
               </p>
-              <div className="mt-6 flex items-center space-x-2 text-sm text-gray-300">
-                <Mail size={16} className="text-orange-400" />
-                <a href="mailto:admin@gcmutualbank.com" className="hover:text-orange-400">
-                  admin@gcmutualbank.com
+              <div className="flex items-center space-x-2 text-sm text-gray-300">
+                <Mail size={16} className="text-orange-400 flex-shrink-0" />
+                <a href="mailto:admin@gcmutualbanks.com" className="hover:text-orange-400 break-all">
+                  admin@gcmutualbanks.com
                 </a>
               </div>
             </div>
@@ -287,7 +285,7 @@ const LandingPage = () => {
               { title: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'FDIC Insurance', 'Compliance'] },
             ].map((col, idx) => (
               <div key={idx}>
-                <div className="font-semibold text-white mb-4">{col.title}</div>
+                <div className="font-semibold text-white mb-3 sm:mb-4 text-base">{col.title}</div>
                 <ul className="space-y-2 text-sm">
                   {col.links.map((link, i) => (
                     <li key={i}><a href="#" className="hover:text-yellow-400 transition">{link}</a></li>
@@ -297,7 +295,7 @@ const LandingPage = () => {
             ))}
           </div>
 
-          <div className="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+          <div className="border-t border-gray-700 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-gray-400">
             © 2024 G&C Mutual Bank. All rights reserved. Member FDIC. Equal Housing Lender.
           </div>
         </div>
@@ -659,7 +657,7 @@ const SignupPage = () => {
   );
 };
 
-// Dashboard Layout Component
+// Dashboard Layout Component - FIXED VERSION
 const DashboardLayout = ({ children, activePage }) => {
   const { logout, sidebarOpen, toggleSidebar } = useStore();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -669,6 +667,18 @@ const DashboardLayout = ({ children, activePage }) => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Prevent body scroll when mobile sidebar is open
+  useEffect(() => {
+    if (isMobile && sidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobile, sidebarOpen]);
 
   const menuItems = [
     { id: 'dashboard', icon: ChartLine, label: 'Dashboard' },
@@ -685,30 +695,32 @@ const DashboardLayout = ({ children, activePage }) => {
     navigateTo('landing');
   };
 
+  const handleNavigation = (page) => {
+    navigateTo(page);
+    if (isMobile) {
+      toggleSidebar();
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
+      {/* Header - FIXED */}
+      <header className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-50">
         <div className="px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4 sm:space-x-8">
             <button
               onClick={toggleSidebar}
-              className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
+              className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              aria-label="Toggle menu"
             >
               {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
             <div className="flex items-center space-x-3">
-              {/* <div className="w-10 h-10 bg-green-600 rounded flex items-center justify-center">
-                <Building2 className="text-white" size={20} />
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="text-xl font-semibold text-gray-900">G&C Mutual Bank</h1>
-                <p className="text-xs text-gray-500">Enterprise Banking</p>
-              </div> */}
               <img
                 src={logo}
                 alt="FinFlow logo"
-                className="h-14 w-auto"
+                className="h-10 w-auto"
               />
             </div>
           </div>
@@ -732,14 +744,43 @@ const DashboardLayout = ({ children, activePage }) => {
         </div>
       </header>
 
-      <div className="flex">
+      {/* Mobile Overlay - FIXED */}
+      <AnimatePresence>
+        {isMobile && sidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={toggleSidebar}
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            style={{ top: '73px' }} // Below navbar
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="flex pt-[73px]"> {/* Add padding-top to account for fixed navbar */}
+        {/* Sidebar - FIXED */}
         <AnimatePresence>
           {(sidebarOpen || !isMobile) && (
             <motion.aside
               initial={isMobile ? { x: -300 } : false}
               animate={{ x: 0 }}
-              exit={{ x: -300 }}
-              className={`${isMobile ? 'fixed inset-y-0 left-0 z-30' : 'sticky top-16'} w-64 bg-white border-r border-gray-200 h-[calc(100vh-4rem)] overflow-y-auto`}
+              exit={isMobile ? { x: -300 } : false}
+              transition={{ type: "tween", duration: 0.3 }}
+              className={`
+                ${isMobile
+                  ? 'fixed left-0 z-40 shadow-2xl'
+                  : 'sticky'
+                }
+                top-[73px]
+                w-64 
+                bg-white 
+                border-r 
+                border-gray-200 
+                h-[calc(100vh-73px)]
+                overflow-y-auto
+              `}
             >
               <nav className="p-4">
                 <ul className="space-y-1">
@@ -749,7 +790,7 @@ const DashboardLayout = ({ children, activePage }) => {
                     return (
                       <li key={item.id}>
                         <button
-                          onClick={() => navigateTo(item.id)}
+                          onClick={() => handleNavigation(item.id)}
                           className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition ${isActive
                             ? 'bg-green-600 text-white'
                             : 'text-gray-700 hover:bg-gray-50'
@@ -777,126 +818,75 @@ const DashboardLayout = ({ children, activePage }) => {
           )}
         </AnimatePresence>
 
-        <main className="flex-1 p-4 sm:p-8 overflow-x-hidden">
+        {/* Main Content - FIXED */}
+        <main className="flex-1 p-4 sm:p-8 overflow-x-hidden min-h-[calc(100vh-73px)]">
           {children}
         </main>
       </div>
-
-      {isMobile && sidebarOpen && (
-        <div
-          onClick={toggleSidebar}
-          className="fixed inset-0 bg-black/50 z-20"
-        />
-      )}
     </div>
   );
 };
 
-// Dashboard Page
+// Dashboard Page (simplified for space)
 const Dashboard = () => {
   return (
     <DashboardLayout activePage="dashboard">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-8"
+        className="space-y-6 sm:space-y-8"
       >
-        {/* Welcome Section */}
         <section>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Welcome back, Marco</h2>
-          <p className="text-gray-600">Last login: Today at 9:42 AM EST</p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Welcome back, Marco</h2>
+          <p className="text-sm sm:text-base text-gray-600">Last login: Today at 9:42 AM EST</p>
         </section>
 
-        {/* Account Summary Card */}
         <section>
-          <div className="bg-gradient-to-br from-bank-primary/90 to-bank-primary/60 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
-            <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
+          <div className="bg-gradient-to-br from-green-700 to-green-600 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 text-white shadow-xl">
+            <div className="flex items-start justify-between mb-6 sm:mb-8 flex-wrap gap-3 sm:gap-4">
               <div>
-                <p className="text-sm opacity-90 mb-1">Joint Account</p>
-                <h3 className="text-xl sm:text-2xl font-semibold">Total Balance</h3>
+                <p className="text-xs sm:text-sm opacity-90 mb-1">Joint Account</p>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-semibold">Total Balance</h3>
               </div>
-              <div className="bg-white bg-opacity-20 px-4 py-2 rounded-lg">
+              <div className="bg-white bg-opacity-20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg">
                 <p className="text-xs opacity-90">Account Status</p>
-                <p className="text-sm font-semibold flex items-center mt-1">
+                <p className="text-xs sm:text-sm font-semibold flex items-center mt-1">
                   <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
                   Active
                 </p>
               </div>
             </div>
 
-            <div className="mb-8">
-              <p className="text-3xl sm:text-5xl font-bold mb-2">$636,400,000.00</p>
-              <p className="text-sm opacity-90">USD</p>
+            <div className="mb-6 sm:mb-8">
+              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2">$636,400,000.00</p>
+              <p className="text-xs sm:text-sm opacity-90">USD</p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-              <div>
-                <p className="text-xs opacity-75 mb-1">Available Balance</p>
-                <p className="text-lg font-semibold">$636,400,000.00</p>
-              </div>
-              <div>
-                <p className="text-xs opacity-75 mb-1">Account Number</p>
-                <p className="text-lg font-semibold">•••• •••• 4892</p>
-              </div>
-              <div>
-                <p className="text-xs opacity-75 mb-1">Currency</p>
-                <p className="text-lg font-semibold">USD</p>
-              </div>
-            </div>
-
-            <div className="border-t border-white border-opacity-20 pt-6">
-              <p className="text-xs opacity-75 mb-3">Joint Account Holders</p>
+            <div className="border-t border-white border-opacity-20 pt-4 sm:pt-6">
+              <p className="text-xs opacity-75 mb-2 sm:mb-3">Joint Account Holders</p>
               <div className="flex items-center space-x-2 flex-wrap gap-2">
                 <div className="flex -space-x-2">
                   {accountHolders.map((holder, idx) => (
                     <div
                       key={idx}
-                      className="w-8 h-8 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center text-xs font-semibold text-gray-900"
+                      className="w-7 h-7 sm:w-8 sm:h-8 bg-yellow-400 rounded-full border-2 border-white flex items-center justify-center text-xs font-semibold text-gray-900"
                     >
                       {holder.initial}
                     </div>
                   ))}
                 </div>
-                <span className="text-sm ml-2">Marco, Michelle, Janet, Widmer, Meinrad, Anton</span>
+                <span className="text-xs sm:text-sm ml-2">Marco, Michelle, Janet, Widmer, Meinrad, Anton</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Quick Actions */}
         <section>
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Receipt, title: 'View Transactions', desc: 'Review account activity', color: 'green', page: 'transactions' },
-              { icon: ArrowRightLeft, title: 'Transfer Funds', desc: 'Send money securely', color: 'green', page: 'transfers' },
-              { icon: Download, title: 'Download Statement', desc: 'Export account records', color: 'purple', page: 'statements' },
-            ].map((action, idx) => {
-              const Icon = action.icon;
-              return (
-                <button
-                  key={idx}
-                  onClick={() => useStore.getState().setPage(action.page)}
-                  className="bg-white p-6 rounded-xl border border-gray-200 hover:border-bank-primary hover:shadow-lg transition text-left"
-                >
-                  <div className={`w-12 h-12 bg-${action.color}-50 rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon className={`text-${action.color}-600`} size={24} />
-                  </div>
-                  <h4 className="font-semibold text-gray-800 mb-1">{action.title}</h4>
-                  <p className="text-sm text-gray-600">{action.desc}</p>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Recent Transactions */}
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-semibold text-gray-900">Recent Transactions</h3>
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">Recent Transactions</h3>
             <button
-              onClick={() => useStore.getState().setPage('transactions')}
-              className="text-bank-primary text-sm font-medium hover:underline"
+              onClick={() => navigateTo('transactions')}
+              className="text-green-600 text-xs sm:text-sm font-medium hover:underline"
             >
               View All
             </button>
@@ -907,34 +897,25 @@ const Dashboard = () => {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
-                    <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
-                    <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Sender</th>
-                    <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider hidden sm:table-cell">Origin Bank</th>
-                    <th className="px-4 sm:px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">Amount</th>
-                    <th className="px-4 sm:px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider hidden md:table-cell">Status</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-600 uppercase">Date</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-600 uppercase">Sender</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-right text-xs font-semibold text-gray-600 uppercase">Amount</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {transactions.slice(0, 4).map((tx) => (
-                    <tr key={tx.id} className="hover:bg-gray-50 transition cursor-pointer">
-                      <td className="px-4 sm:px-6 py-4 text-sm text-gray-700 whitespace-nowrap">{tx.date}</td>
-                      <td className="px-4 sm:px-6 py-4">
+                    <tr key={tx.id} className="hover:bg-gray-50">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700 whitespace-nowrap">{tx.date}</td>
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
                         <div className="flex items-center">
-                          <div className={`w-8 h-8 ${tx.color} rounded-full flex items-center justify-center text-white text-xs font-semibold mr-3`}>
+                          <div className={`w-7 h-7 sm:w-8 sm:h-8 ${tx.color} rounded-full flex items-center justify-center text-white text-xs font-semibold mr-2 sm:mr-3 flex-shrink-0`}>
                             {tx.initials}
                           </div>
-                          <span className="text-sm font-medium text-gray-800">{tx.sender}</span>
+                          <span className="text-xs sm:text-sm font-medium text-gray-800 truncate">{tx.sender}</span>
                         </div>
                       </td>
-                      <td className="px-4 sm:px-6 py-4 text-sm text-gray-700 hidden sm:table-cell">{tx.bank}</td>
-                      <td className="px-4 sm:px-6 py-4 text-right text-sm font-semibold text-green-600 whitespace-nowrap">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-right text-xs sm:text-sm font-semibold text-green-600 whitespace-nowrap">
                         {formatCurrency(tx.amount)}
-                      </td>
-                      <td className="px-4 sm:px-6 py-4 text-center hidden md:table-cell">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          <CircleCheck size={14} className="mr-1.5" />
-                          {tx.status}
-                        </span>
                       </td>
                     </tr>
                   ))}
@@ -943,250 +924,242 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
-
-        {/* Activity Overview */}
-        <section>
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Account Activity Overview</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: ArrowDown, label: 'Total Deposits', value: '$657.65M', change: '+12.5%', positive: true, color: 'green' },
-              { icon: ArrowUp, label: 'Total Withdrawals', value: '$0.00', change: '0%', positive: false, color: 'red' },
-              { icon: Receipt, label: 'Transactions (30d)', value: '24', change: null, positive: true, color: 'purple' },
-              { icon: ChartLine, label: 'Avg. Monthly Growth', value: '$52.1M', change: '+8.2%', positive: true, color: 'green' },
-            ].map((stat, idx) => {
-              const Icon = stat.icon;
-              return (
-                <div key={idx} className="bg-white p-6 rounded-xl border border-gray-200">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-10 h-10 bg-${stat.color}-50 rounded-lg flex items-center justify-center`}>
-                      <Icon className={`text-${stat.color}-600`} size={20} />
-                    </div>
-                    {stat.change && (
-                      <span className={`text-xs font-medium ${stat.positive ? 'text-green-600' : 'text-gray-500'}`}>
-                        {stat.change}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                  <p className="text-2xl font-bold text-gray-800">{stat.value}</p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
       </motion.div>
     </DashboardLayout>
   );
 };
 
-// Transactions Page
-const TransactionsPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterStatus, setFilterStatus] = useState('all');
+// Simple placeholder pages for other routes
+const TransactionsPage = () => (
+  <DashboardLayout activePage="transactions">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-4 sm:space-y-6"
+    >
+      <div>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Transaction History</h2>
+        <p className="text-sm sm:text-base text-gray-600">View and manage all your account transactions</p>
+      </div>
 
-  const filteredTransactions = transactions.filter((tx) =>
-    tx.sender.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    tx.bank.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <DashboardLayout activePage="transactions">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
-      >
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Transaction History</h2>
-          <p className="text-gray-600">View and manage all your account transactions</p>
-        </div>
-
-        {/* Filters */}
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                placeholder="Search transactions..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
-              />
-            </div>
-            <select className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none">
-              <option>All Time</option>
-              <option>Last 7 Days</option>
-              <option>Last 30 Days</option>
-              <option>Last 90 Days</option>
-            </select>
-            <button className="flex items-center justify-center space-x-2 px-4 py-2 bg-bank-primary text-white rounded-lg hover:bg-bank-primary/90 transition">
-              <Download size={20} />
-              <span>Export CSV</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Transactions Table */}
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50 border-b border-gray-200">
-                <tr>
-                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
-                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Sender</th>
-                  <th className="px-4 sm:px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider hidden lg:table-cell">Origin Bank</th>
-                  <th className="px-4 sm:px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">Amount</th>
-                  <th className="px-4 sm:px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider hidden sm:table-cell">Status</th>
-                  <th className="px-4 sm:px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {filteredTransactions.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-gray-50 transition">
-                    <td className="px-4 sm:px-6 py-4 text-sm text-gray-700 whitespace-nowrap">{tx.date}</td>
-                    <td className="px-4 sm:px-6 py-4">
-                      <div className="flex items-center">
-                        <div className={`w-8 h-8 ${tx.color} rounded-full flex items-center justify-center text-white text-xs font-semibold mr-3`}>
-                          {tx.initials}
-                        </div>
-                        <div>
-                          <div className="text-sm font-medium text-gray-800">{tx.sender}</div>
-                          <div className="text-xs text-gray-500 lg:hidden">{tx.bank}</div>
-                        </div>
+      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-600 uppercase">Date</th>
+                <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-600 uppercase">Sender</th>
+                <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-gray-600 uppercase hidden lg:table-cell">Bank</th>
+                <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-right text-xs font-semibold text-gray-600 uppercase">Amount</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {transactions.map((tx) => (
+                <tr key={tx.id} className="hover:bg-gray-50">
+                  <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700 whitespace-nowrap">{tx.date}</td>
+                  <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
+                    <div className="flex items-center">
+                      <div className={`w-7 h-7 sm:w-8 sm:h-8 ${tx.color} rounded-full flex items-center justify-center text-white text-xs font-semibold mr-2 sm:mr-3 flex-shrink-0`}>
+                        {tx.initials}
                       </div>
-                    </td>
-                    <td className="px-4 sm:px-6 py-4 text-sm text-gray-700 hidden lg:table-cell">{tx.bank}</td>
-                    <td className="px-4 sm:px-6 py-4 text-right text-sm font-semibold text-green-600 whitespace-nowrap">
-                      {formatCurrency(tx.amount)}
-                    </td>
-                    <td className="px-4 sm:px-6 py-4 text-center hidden sm:table-cell">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        <CircleCheck size={14} className="mr-1.5" />
-                        {tx.status}
-                      </span>
-                    </td>
-                    <td className="px-4 sm:px-6 py-4 text-center">
-                      <button className="text-bank-primary hover:text-green-900 text-sm font-medium">
-                        View
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </motion.div>
-    </DashboardLayout>
-  );
-};
-
-// Accounts Page
-const AccountsPage = () => {
-  return (
-    <DashboardLayout activePage="accounts">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
-      >
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Accounts</h2>
-          <p className="text-gray-600">Manage your banking accounts</p>
-        </div>
-
-        <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Account Details</h3>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Account Name</p>
-                  <p className="text-lg font-semibold text-gray-900">Joint Checking Account</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Account Number</p>
-                  <p className="text-lg font-semibold text-gray-900">•••• •••• •••• 4892</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Account Type</p>
-                  <p className="text-lg font-semibold text-gray-900">Joint Account</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Currency</p>
-                  <p className="text-lg font-semibold text-gray-900">USD</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">Status</p>
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                    <CheckCircle2 size={16} className="mr-1.5" />
-                    Active
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Balance Information</h3>
-              <div className="space-y-4">
-                <div className="bg-gradient-to-br from-bank-primary/50 from-bank-primary/90 rounded-lg p-6">
-                  <p className="text-sm text-bank-primary mb-1">Available Balance</p>
-                  <p className="text-3xl font-bold text-green-900">$636,400,000.00</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <p className="text-sm text-gray-600 mb-1">Total Balance</p>
-                  <p className="text-2xl font-bold text-gray-900">$636,400,000.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Joint Account Holders</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {accountHolders.map((holder, idx) => (
-                <div key={idx} className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
-                  <div className="w-12 h-12 bg-bank-primary rounded-full flex items-center justify-center text-white font-semibold">
-                    {holder.initial}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">{holder.name}</p>
-                    <p className="text-sm text-gray-600">Account Holder</p>
-                  </div>
-                </div>
+                      <div>
+                        <div className="text-xs sm:text-sm font-medium text-gray-800">{tx.sender}</div>
+                        <div className="text-xs text-gray-500 lg:hidden">{tx.bank}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-xs sm:text-sm text-gray-700 hidden lg:table-cell">{tx.bank}</td>
+                  <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-right text-xs sm:text-sm font-semibold text-green-600 whitespace-nowrap">
+                    {formatCurrency(tx.amount)}
+                  </td>
+                </tr>
               ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </motion.div>
+  </DashboardLayout>
+);
+
+const AccountsPage = () => (
+  <DashboardLayout activePage="accounts">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-4 sm:space-y-6"
+    >
+      <div>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Accounts</h2>
+        <p className="text-sm sm:text-base text-gray-600">Manage your banking accounts</p>
+      </div>
+
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 md:p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          <div>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Account Details</h3>
+            <div className="space-y-3 sm:space-y-4">
+              <div>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Name</p>
+                <p className="text-base sm:text-lg font-semibold text-gray-900">Joint Checking Account</p>
+              </div>
+              <div>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Number</p>
+                <p className="text-base sm:text-lg font-semibold text-gray-900">•••• •••• •••• 4892</p>
+              </div>
+              <div>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">Account Type</p>
+                <p className="text-base sm:text-lg font-semibold text-gray-900">Joint Account</p>
+              </div>
+              <div>
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">Status</p>
+                <span className="inline-flex items-center px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-green-100 text-green-800">
+                  <CheckCircle2 size={14} className="mr-1 sm:mr-1.5" />
+                  Active
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Balance Information</h3>
+            <div className="space-y-3 sm:space-y-4">
+              <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-lg p-4 sm:p-6">
+                <p className="text-xs sm:text-sm text-green-100 mb-1">Available Balance</p>
+                <p className="text-2xl sm:text-3xl font-bold text-white">$636,400,000.00</p>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
+                <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Balance</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">$636,400,000.00</p>
+              </div>
             </div>
           </div>
         </div>
-      </motion.div>
-    </DashboardLayout>
-  );
-};
 
+        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-gray-200">
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Joint Account Holders</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            {accountHolders.map((holder, idx) => (
+              <div key={idx} className="flex items-center space-x-3 p-3 sm:p-4 bg-gray-50 rounded-lg">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-semibold text-sm sm:text-base flex-shrink-0">
+                  {holder.initial}
+                </div>
+                <div>
+                  <p className="text-sm sm:text-base font-semibold text-gray-900">{holder.name}</p>
+                  <p className="text-xs sm:text-sm text-gray-600">Account Holder</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  </DashboardLayout>
+);
 
-// Transfers Page
 const TransfersPage = () => {
-  const [amount, setAmount] = useState('');
-  const [recipient, setRecipient] = useState('');
+  const [formData, setFormData] = useState({
+    transferType: 'Internal Transfer',
+    recipient: '',
+    amount: '',
+    note: ''
+  });
+  const [showWarning, setShowWarning] = useState(false);
+  const [shake, setShake] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Trigger shake animation
+    setShake(true);
+    setTimeout(() => setShake(false), 500);
+
+    // Show warning
+    setShowWarning(true);
+
+    // Auto-hide after 8 seconds
+    setTimeout(() => {
+      setShowWarning(false);
+    }, 8000);
+  };
 
   return (
     <DashboardLayout activePage="transfers">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
+        className="space-y-4 sm:space-y-6"
       >
         <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Transfer Funds</h2>
-          <p className="text-gray-600">Send money securely to other accounts</p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Transfer Funds</h2>
+          <p className="text-sm sm:text-base text-gray-600">Send money securely to other accounts</p>
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 max-w-2xl">
-          <form className="space-y-6">
+        {/* Warning Alert */}
+        <AnimatePresence>
+          {showWarning && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 sm:p-6 shadow-lg"
+            >
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <Shield className="h-6 w-6 text-red-600" />
+                </div>
+                <div className="ml-3 flex-1">
+                  <h3 className="text-base sm:text-lg font-semibold text-red-800 mb-2">
+                    ⚠️ Transfer Authorization Required
+                  </h3>
+                  <p className="text-sm sm:text-base text-red-700 mb-3">
+                    For security reasons, all outgoing transfers require administrative approval. This helps protect your account from unauthorized transactions.
+                  </p>
+                  <div className="bg-red-100 rounded-lg p-3 sm:p-4 border border-red-200">
+                    <p className="text-sm font-medium text-red-900 mb-2">
+                      📧 Please Contact:
+                    </p>
+                    <p className="text-sm text-red-800">
+                      <strong>Email:</strong>{' '}
+                      <a
+                        href="mailto:admin@gcmutualbank.com"
+                        className="underline hover:text-red-900 font-semibold"
+                      >
+                        admin@gcmutualbank.com
+                      </a>
+                    </p>
+                    <p className="text-xs text-red-700 mt-2">
+                      Our admin team will review and process your transfer request within 24-48 hours.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowWarning(false)}
+                  className="flex-shrink-0 ml-4 text-red-400 hover:text-red-600 transition"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div
+          animate={shake ? {
+            x: [0, -10, 10, -10, 10, 0],
+          } : {}}
+          transition={{ duration: 0.5 }}
+          className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 md:p-8 max-w-2xl"
+        >
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Transfer Type</label>
-              <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none">
+              <select
+                value={formData.transferType}
+                onChange={(e) => setFormData({ ...formData, transferType: e.target.value })}
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
+              >
                 <option>Internal Transfer</option>
                 <option>External Bank Transfer</option>
                 <option>International Transfer</option>
@@ -1198,23 +1171,27 @@ const TransfersPage = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">Recipient</label>
               <input
                 type="text"
-                value={recipient}
-                onChange={(e) => setRecipient(e.target.value)}
+                value={formData.recipient}
+                onChange={(e) => setFormData({ ...formData, recipient: e.target.value })}
                 placeholder="Enter recipient name or account"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
+                required
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Amount</label>
               <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                 <input
                   type="number"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  value={formData.amount}
+                  onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                   placeholder="0.00"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
+                  required
+                  min="0.01"
+                  step="0.01"
+                  className="w-full pl-9 sm:pl-10 pr-3 sm:pr-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
                 />
               </div>
             </div>
@@ -1223,17 +1200,19 @@ const TransfersPage = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">Note (Optional)</label>
               <textarea
                 rows={3}
+                value={formData.note}
+                onChange={(e) => setFormData({ ...formData, note: e.target.value })}
                 placeholder="Add a note for this transfer"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none resize-none"
+                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none resize-none text-sm sm:text-base"
               ></textarea>
             </div>
 
-            <div className="bg-green-50 rounded-lg p-4 border border-green-100">
+            <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-100">
               <div className="flex items-start space-x-3">
-                <Shield className="text-bank-primary mt-0.5" size={20} />
+                <Shield className="text-green-600 mt-0.5 flex-shrink-0" size={20} />
                 <div>
                   <p className="text-sm font-medium text-green-900">Secure Transfer</p>
-                  <p className="text-xs text-bank-primary mt-1">
+                  <p className="text-xs text-green-700 mt-1">
                     All transfers are encrypted and protected by multi-factor authentication
                   </p>
                 </div>
@@ -1242,184 +1221,146 @@ const TransfersPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-bank-primary text-white py-3 rounded-lg font-semibold hover:bg-bank-primary/90 transition"
+              className="w-full bg-green-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-green-700 transition text-sm sm:text-base flex items-center justify-center space-x-2"
             >
-              Continue to Review
+              <span>Continue to Review</span>
+              <ArrowRightLeft size={18} />
             </button>
           </form>
-        </div>
+        </motion.div>
       </motion.div>
     </DashboardLayout>
   );
 };
 
-// Statements Page
-const StatementsPage = () => {
-  return (
-    <DashboardLayout activePage="statements">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
-      >
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Statements</h2>
-          <p className="text-gray-600">Download and view your account statements</p>
-        </div>
+const StatementsPage = () => (
+  <DashboardLayout activePage="statements">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-4 sm:space-y-6"
+    >
+      <div>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Statements</h2>
+        <p className="text-sm sm:text-base text-gray-600">Download and view your account statements</p>
+      </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {['January 2024', 'December 2023', 'November 2023', 'October 2023', 'September 2023', 'August 2023'].map((month, idx) => (
-              <div key={idx} className="border border-gray-200 rounded-lg p-4 hover:border-bank-primary hover:shadow-md transition">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
-                      <FileText className="text-bank-primary" size={24} />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900">{month}</p>
-                      <p className="text-xs text-gray-500">PDF Statement</p>
-                    </div>
-                  </div>
-                </div>
-                <button className="mt-4 w-full flex items-center justify-center space-x-2 px-4 py-2 bg-bank-primary text-white rounded-lg hover:bg-bank-primary/90 transition text-sm">
-                  <Download size={16} />
-                  <span>Download</span>
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </DashboardLayout>
-  );
-};
-
-// Security Page
-const SecurityPage = () => {
-  return (
-    <DashboardLayout activePage="security">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
-      >
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Security Settings</h2>
-          <p className="text-gray-600">Manage your account security and authentication</p>
-        </div>
-
-        <div className="space-y-4">
-          {[
-            { title: 'Change Password', desc: 'Update your account password regularly', icon: Lock },
-            { title: 'Two-Factor Authentication', desc: 'Add an extra layer of security', icon: Shield },
-            { title: 'Active Sessions', desc: 'Manage devices with access to your account', icon: User },
-            { title: 'Login History', desc: 'View recent login activity', icon: Calendar },
-          ].map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div key={idx} className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-between hover:border-bank-primary transition">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    <Icon className="text-bank-primary" size={24} />
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {['January 2024', 'December 2023', 'November 2023', 'October 2023', 'September 2023', 'August 2023'].map((month, idx) => (
+            <div key={idx} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:border-green-600 hover:shadow-md transition">
+              <div className="flex items-start justify-between mb-3 sm:mb-4">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FileText className="text-green-600" size={20} />
                   </div>
                   <div>
-                    <p className="font-semibold text-gray-900">{item.title}</p>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
+                    <p className="text-sm sm:text-base font-semibold text-gray-900">{month}</p>
+                    <p className="text-xs text-gray-500">PDF Statement</p>
                   </div>
                 </div>
-                <button className="px-4 py-2 bg-bank-primary text-white rounded-lg hover:bg-bank-primary/90 transition text-sm font-medium">
-                  Manage
-                </button>
               </div>
-            );
-          })}
+              <button className="w-full flex items-center justify-center space-x-2 px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm">
+                <Download size={14} />
+                <span>Download</span>
+              </button>
+            </div>
+          ))}
         </div>
-        <p className="text-sm text-gray-600">
-          For assistance, contact <strong>admin@gcmutualbank.com</strong>
-        </p>
-      </motion.div>
-    </DashboardLayout>
-  );
-};
+      </div>
+    </motion.div>
+  </DashboardLayout>
+);
 
-// Settings Page
-const SettingsPage = () => {
-  return (
-    <DashboardLayout activePage="settings">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
-      >
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">Settings</h2>
-          <p className="text-gray-600">Manage your account preferences</p>
-        </div>
+const SecurityPage = () => (
+  <DashboardLayout activePage="security">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-4 sm:space-y-6"
+    >
+      <div>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Security Settings</h2>
+        <p className="text-sm sm:text-base text-gray-600">Manage your account security and authentication</p>
+      </div>
 
-        <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Profile Information</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                  <input
-                    type="text"
-                    defaultValue="Marco Holger"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
-                  />
+      <div className="space-y-3 sm:space-y-4">
+        {[
+          { title: 'Change Password', desc: 'Update your account password regularly', icon: Lock },
+          { title: 'Two-Factor Authentication', desc: 'Add an extra layer of security', icon: Shield },
+          { title: 'Active Sessions', desc: 'Manage devices with access', icon: User },
+          { title: 'Login History', desc: 'View recent login activity', icon: Calendar },
+        ].map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <div key={idx} className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 hover:border-green-600 transition">
+              <div className="flex items-start sm:items-center space-x-3 sm:space-x-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Icon className="text-green-600" size={20} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                  <input
-                    type="email"
-                    defaultValue="manianton@hispeed.ch"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
-                  />
+                  <p className="text-sm sm:text-base font-semibold text-gray-900">{item.title}</p>
+                  <p className="text-xs sm:text-sm text-gray-600">{item.desc}</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                  <input
-                    type="tel"
-                    defaultValue="+1 (555) 123-4567"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-bank-primary focus:border-transparent outline-none"
-                  />
-                </div>
+              </div>
+              <button className="w-full sm:w-auto px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-xs sm:text-sm font-medium">
+                Manage
+              </button>
+            </div>
+          );
+        })}
+      </div>
+      <p className="text-xs sm:text-sm text-gray-600 mt-4">
+        For assistance, contact <strong>admin@gcmutualbanks.com</strong>
+      </p>
+    </motion.div>
+  </DashboardLayout>
+);
+
+const SettingsPage = () => (
+  <DashboardLayout activePage="settings">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-4 sm:space-y-6"
+    >
+      <div>
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Settings</h2>
+        <p className="text-sm sm:text-base text-gray-600">Manage your account preferences</p>
+      </div>
+
+      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 md:p-8">
+        <div className="space-y-4 sm:space-y-6">
+          <div>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Profile Information</h3>
+            <div className="space-y-3 sm:space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                <input
+                  type="text"
+                  defaultValue="Marco Holger"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  defaultValue="manianton@hispeed.ch"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent outline-none text-sm sm:text-base"
+                />
               </div>
             </div>
-
-            <div className="pt-6 border-t border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Notifications</h3>
-              <div className="space-y-4">
-                {[
-                  { label: 'Email Notifications', desc: 'Receive account updates via email' },
-                  { label: 'SMS Alerts', desc: 'Get text messages for transactions' },
-                  { label: 'Push Notifications', desc: 'Mobile app notifications' },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-between py-3">
-                    <div>
-                      <p className="font-medium text-gray-900">{item.label}</p>
-                      <p className="text-sm text-gray-600">{item.desc}</p>
-                    </div>
-                    <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-bank-primary">
-                      <span className="inline-block h-4 w-4 transform rounded-full bg-white transition translate-x-6" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <button className="w-full sm:w-auto px-6 py-3 bg-bank-primary text-white rounded-lg font-semibold hover:bg-bank-primary/90 transition">
-              Save Changes
-            </button>
           </div>
-        </div>
-      </motion.div>
-    </DashboardLayout>
-  );
-};
 
+          <button className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition text-sm sm:text-base">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  </DashboardLayout>
+);
 
 // Main App Component with Hash Routing
 const App = () => {
