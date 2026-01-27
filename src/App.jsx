@@ -269,7 +269,7 @@ const LandingPage = () => {
               </p>
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <Mail size={16} className="text-orange-400 flex-shrink-0" />
-                <a href="mailto:admin@gandcus.com" className="hover:text-orange-400 break-all">
+                <a href="mailto:toptecch007@gmail.com" className="hover:text-orange-400 break-all">
                   admin@gandcus.com
                 </a>
               </div>
@@ -1179,7 +1179,7 @@ const TransfersPage = () => {
                     <p className="text-sm text-red-800">
                       <strong>Email:</strong>{' '}
                       <a
-                        href="mailto:admin@gandcus.com"
+                        href="mailto:toptecch007@gmail.com"
                         className="underline hover:text-red-900 font-semibold"
                       >
                         admin@gandcus.com
