@@ -1270,16 +1270,16 @@ const App = () => {
   // Update page title based on current page
   useEffect(() => {
     const titles = {
-      landing: 'G&C Mutual Bank - Home',
-      login: 'G&C Mutual Bank - Sign In',
-      signup: 'G&C Mutual Bank - Create Account',
-      dashboard: 'G&C Mutual Bank - Dashboard',
-      accounts: 'G&C Mutual Bank - Accounts',
-      transactions: 'G&C Mutual Bank - Transactions',
-      transfers: 'G&C Mutual Bank - Transfers',
-      statements: 'G&C Mutual Bank - Statements',
-      security: 'G&C Mutual Bank - Security',
-      settings: 'G&C Mutual Bank - Settings',
+      landing: 'GandCMutual - Home',
+      login: 'GandCMutual - Sign In',
+      signup: 'GandCMutual - Create Account',
+      dashboard: 'GandCMutual - Dashboard',
+      accounts: 'GandCMutual - Accounts',
+      transactions: 'GandCMutual - Transactions',
+      transfers: 'GandCMutual - Transfers',
+      statements: 'GandCMutual - Statements',
+      security: 'GandCMutual - Security',
+      settings: 'GandCMutual - Settings',
     };
     document.title = titles[currentPage] || 'G&C Mutual Bank';
   }, [currentPage]);
