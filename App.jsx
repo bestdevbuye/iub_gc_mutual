@@ -838,7 +838,7 @@ const Dashboard = () => {
       >
         <section>
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-1 sm:mb-2">Welcome back, Marco</h2>
-          <p className="text-sm sm:text-base text-gray-600">Last login: Today at 9:42 AM EST</p>
+          <p className="text-sm sm:text-base text-gray-600">Last login: Today at 8:45 AM EST</p>
         </section>
 
         <section>
